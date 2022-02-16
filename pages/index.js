@@ -1,14 +1,50 @@
 import Head from "next/head"
-import Button from "../components/Button"
+import { useEffect, useState } from "react"
+import Modal from "../components/Modal"
 import styles from "./styles.module.scss"
 
-const list = [
-  {
-    name: "Helado de pegelagarto",
-  },
-]
-
 export default function Home() {
+  const [list, setList] = useState([])
+  const [showModal, setShowModal] = useState(false)
+  const [itemInput, setItemInput] = useState("")
+  const [disableAdd, setDisableAdd] = useState(true)
+
+  useEffect(() => {
+    const data = window.localStorage.getItem("marketlist-tydrok")
+    if (data) setList(JSON.parse(data))
+  }, [])
+
+  useEffect(() => {
+    !itemInput ? setDisableAdd(true) : setDisableAdd(false)
+  }, [itemInput])
+
+  const closeForm = (e) => {
+    e.preventDefault()
+    setShowModal(false)
+    setDisableAdd(true)
+  }
+  const addItem = (e) => {
+    e.preventDefault()
+    const itemToAdd = {
+      name: itemInput,
+    }
+    window.localStorage.setItem(
+      "marketlist-tydrok",
+      JSON.stringify([...list, itemToAdd])
+    )
+    setList([...list, itemToAdd])
+    setShowModal(false)
+    setDisableAdd(true)
+  }
+
+  const removeItem = (e) => {
+    const updatedList = list.filter((item) => item.name !== e)
+    window.localStorage.setItem(
+      "marketlist-tydrok",
+      JSON.stringify(updatedList)
+    )
+    setList(updatedList)
+  }
   return (
     <div className={styles.background}>
       <Head>
@@ -18,18 +54,47 @@ export default function Home() {
       </Head>
       <main className={styles.view}>
         <h1 className={styles.title}>Supermarket list</h1>
-        <h2 className={styles.counter}>0 item(s)</h2>
+        <h2 className={styles.counter}>{list.length} item(s)</h2>
         <ul className={styles.list}>
           {list.map((e) => {
             return (
               <li key={e.name} className={styles.item}>
                 <span>{e.name}</span>
-                <button className={styles.delete}>delete</button>
+                <button
+                  className={styles.delete}
+                  onClick={() => removeItem(e.name)}
+                >
+                  delete
+                </button>
               </li>
             )
           })}
         </ul>
-        <Button>Add item</Button>
+        <button onClick={() => setShowModal(true)} className={styles.button}>
+          Add item
+        </button>
+        {showModal && (
+          <Modal>
+            <form className={styles.form} onSubmit={addItem}>
+              <label className={styles.label}>Add item</label>
+              <input
+                onChange={(e) => setItemInput(e.target.value)}
+                type="text"
+                className={styles.field}
+              ></input>
+              <button onClick={closeForm} className={styles.button_close}>
+                Close
+              </button>
+              <button
+                disabled={disableAdd}
+                className={styles.button}
+                type="submit"
+              >
+                Add
+              </button>
+            </form>
+          </Modal>
+        )}
       </main>
     </div>
   )
