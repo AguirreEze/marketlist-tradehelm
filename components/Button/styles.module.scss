@@ -1,0 +1,15 @@
+@import "styles/theme.scss";
+
+.button {
+  width: 100%;
+  height: $Field-Height;
+  background-color: $Blue;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  &:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
