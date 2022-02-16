@@ -1,4 +1,4 @@
-//Mesures
+// Mesures
 
 $List-Width: 600px;
 $Field-Height: 48px;
@@ -6,3 +6,23 @@ $Field-Height: 48px;
 // Colors
 
 $Blue: #01a8ff;
+
+// Components
+.button {
+  width: 100%;
+  height: $Field-Height;
+  background-color: $Blue;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  &:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
+.button_close {
+  @extend .button;
+  color: #000;
+  background-color: #f0f0f0;
+}
