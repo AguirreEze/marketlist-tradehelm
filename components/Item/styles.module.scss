@@ -1,0 +1,22 @@
+@import "styles/theme.scss";
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 4px 8px 16px #0001;
+  height: $Field-Height;
+  padding: 0.5rem;
+}
+.delete {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  &:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
