@@ -13,7 +13,6 @@ export default function ItemForm({ setShowModal, listState }) {
   const closeForm = (e) => {
     e.preventDefault()
     setShowModal(false)
-    setDisableAdd(true)
   }
   const addItem = (e) => {
     e.preventDefault()
