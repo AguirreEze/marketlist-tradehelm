@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import Modal from "../components/Modal"
 import styles from "./styles.module.scss"
 
+const SIMULATED_DELAY = 1000
+
 export default function Home() {
   const [list, setList] = useState([])
   const [showModal, setShowModal] = useState(false)
@@ -25,8 +27,15 @@ export default function Home() {
   }
   const addItem = (e) => {
     e.preventDefault()
+    setDisableAdd(true)
+    setTimeout(() => {
+      saveItemInLocalStorage(itemInput)
+    }, SIMULATED_DELAY)
+  }
+
+  const saveItemInLocalStorage = (item) => {
     const itemToAdd = {
-      name: itemInput,
+      name: item,
     }
     window.localStorage.setItem(
       "marketlist-tydrok",
@@ -34,16 +43,16 @@ export default function Home() {
     )
     setList([...list, itemToAdd])
     setShowModal(false)
-    setDisableAdd(true)
   }
-
   const removeItem = (e) => {
-    const updatedList = list.filter((item) => item.name !== e)
-    window.localStorage.setItem(
-      "marketlist-tydrok",
-      JSON.stringify(updatedList)
-    )
-    setList(updatedList)
+    setTimeout(() => {
+      const updatedList = list.filter((item) => item.name !== e)
+      window.localStorage.setItem(
+        "marketlist-tydrok",
+        JSON.stringify(updatedList)
+      )
+      setList(updatedList)
+    }, SIMULATED_DELAY)
   }
   return (
     <div className={styles.background}>
