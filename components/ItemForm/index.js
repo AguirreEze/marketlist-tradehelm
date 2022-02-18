@@ -41,7 +41,7 @@ export default function ItemForm({ setShowModal, listState }) {
         type="text"
         className={styles.field}
       ></input>
-      <button onClick={closeForm} className={styles.button_close}>
+      <button onClick={closeForm} className={styles.button_close} type="button">
         Close
       </button>
       <button disabled={disableAdd} className={styles.button} type="submit">
