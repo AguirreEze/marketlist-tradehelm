@@ -14,6 +14,7 @@ export default function Item({ data, listState }) {
         JSON.stringify(updatedList)
       )
       setList(updatedList)
+      setDisabled(false)
     }, 1000)
   }
   return (
