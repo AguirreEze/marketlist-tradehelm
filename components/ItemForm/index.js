@@ -18,22 +18,22 @@ export default function ItemForm({ setShowModal, listState }) {
   const addItem = (e) => {
     e.preventDefault()
     setDisableAdd(true)
-    setTimeout(() => {
-      saveItemInLocalStorage(itemInput)
-    }, 1000)
+    saveItemInLocalStorage(itemInput)
   }
   const saveItemInLocalStorage = (item) => {
-    const id = uuidv4()
-    const itemToAdd = {
-      name: item,
-      id,
-    }
-    window.localStorage.setItem(
-      "marketlist-tydrok",
-      JSON.stringify([...list, itemToAdd])
-    )
-    setList([...list, itemToAdd])
-    setShowModal(false)
+    setTimeout(() => {
+      const id = uuidv4()
+      const itemToAdd = {
+        name: item,
+        id,
+      }
+      window.localStorage.setItem(
+        "marketlist-tydrok",
+        JSON.stringify([...list, itemToAdd])
+      )
+      setList([...list, itemToAdd])
+      setShowModal(false)
+    }, 1000)
   }
 
   return (
@@ -42,7 +42,9 @@ export default function ItemForm({ setShowModal, listState }) {
       <input
         onChange={(e) => setItemInput(e.target.value)}
         type="text"
+        aria-label="item"
         className={styles.field}
+        value={itemInput}
       ></input>
       <button onClick={closeForm} className={styles.button_close} type="button">
         Close
