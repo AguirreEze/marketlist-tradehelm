@@ -25,8 +25,8 @@ export default function Home() {
         <h1 className={styles.title}>Supermarket list</h1>
         <h2 className={styles.counter}>{list.length} item(s)</h2>
         <ul className={styles.list}>
-          {list.map((e, index) => (
-            <Item data={e} key={index} listState={[list, setList]} />
+          {list.map((e) => (
+            <Item data={e} key={e.id} listState={[list, setList]} />
           ))}
         </ul>
         <button onClick={() => setShowModal(true)} className={styles.button}>

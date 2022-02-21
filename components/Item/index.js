@@ -5,10 +5,13 @@ export default function Item({ data, listState }) {
   const [list, setList] = listState
   const [disabled, setDisabled] = useState(false)
 
-  const removeItem = (e) => {
+  const removeItem = (id) => {
     setDisabled(true)
+    removeItemInLocalStorage(id)
+  }
+  const removeItemInLocalStorage = (id) => {
     setTimeout(() => {
-      const updatedList = list.filter((item) => item.name !== e)
+      const updatedList = list.filter((item) => item.id !== id)
       window.localStorage.setItem(
         "marketlist-tydrok",
         JSON.stringify(updatedList)
@@ -22,7 +25,7 @@ export default function Item({ data, listState }) {
       <span>{data.name}</span>
       <button
         className={styles.delete}
-        onClick={() => removeItem(data.name)}
+        onClick={() => removeItem(data.id)}
         disabled={disabled}
       >
         delete

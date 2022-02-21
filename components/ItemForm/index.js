@@ -1,5 +1,6 @@
 import styles from "./styles.module.scss"
 import { useEffect, useState } from "react"
+import { v4 as uuidv4 } from "uuid"
 
 export default function ItemForm({ setShowModal, listState }) {
   const [list, setList] = listState
@@ -22,8 +23,10 @@ export default function ItemForm({ setShowModal, listState }) {
     }, 1000)
   }
   const saveItemInLocalStorage = (item) => {
+    const id = uuidv4()
     const itemToAdd = {
       name: item,
+      id,
     }
     window.localStorage.setItem(
       "marketlist-tydrok",
