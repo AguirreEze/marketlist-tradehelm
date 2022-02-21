@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import Item from "../components/Item"
 import ItemForm from "../components/ItemForm"
 import Modal from "../components/Modal"
+import ThemeChanger from "../components/ThemeChanger"
 import styles from "./styles.module.scss"
 
 export default function Home() {
@@ -22,7 +23,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.view}>
-        <h1 className={styles.title}>Supermarket list</h1>
+        <div className={styles.title_container}>
+          <h1 className={styles.title}>Supermarket list</h1>
+          <ThemeChanger />
+        </div>
         <h2 className={styles.counter}>{list.length} item(s)</h2>
         <ul className={styles.list}>
           {list.map((e) => (
