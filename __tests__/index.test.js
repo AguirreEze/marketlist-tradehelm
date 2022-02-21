@@ -2,11 +2,18 @@ import { render, screen } from "@testing-library/react"
 import Home from "../pages"
 
 describe("Home", () => {
-  it("renders a heading", () => {
+  beforeEach(() => {
     render(<Home />)
-    const heading = screen.getByRole("heading", {
-      name: /welcome to next\.js!/i,
-    })
-    expect(heading).toBeInTheDocument()
+  })
+  it("renders a home", () => {
+    expect(screen.getByText("Supermarket list")).toBeTruthy()
+  })
+  it("has button Add item", () => {
+    const button = screen.getByRole("button")
+    expect(button.textContent).toBe("Add item")
+  })
+  it("list starts empty", () => {
+    const value = screen.getByText(/item\(s\)/)
+    expect(value.textContent.startsWith("0")).toBeTruthy()
   })
 })
