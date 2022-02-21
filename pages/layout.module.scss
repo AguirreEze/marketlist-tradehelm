@@ -1,0 +1,41 @@
+.button {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  width: 2.5rem;
+  height: 1rem;
+  &::after {
+    content: "";
+    position: absolute;
+    left: -0.25rem;
+    top: -0.25rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+    background-color: #333;
+    border: 1px solid #fff3;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2.5rem;
+    height: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    background: #fff;
+  }
+}
+
+.button:checked {
+  &::after {
+    left: unset;
+    right: -0.25rem;
+    background-color: #eee;
+    border: 1px solid #0003;
+  }
+  &::before {
+    background-color: #333;
+  }
+}
