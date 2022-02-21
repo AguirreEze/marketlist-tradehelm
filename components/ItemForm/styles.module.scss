@@ -7,7 +7,7 @@
   grid-template-columns: 1fr 1fr;
   place-items: center;
   padding: 1rem;
-  background-color: #fff;
+  background-color: var(--list-background);
   gap: 1rem;
 }
 
@@ -21,4 +21,8 @@
   height: $Field-Height;
   padding: 1rem;
   outline-color: #005fcc;
+  border-radius: 5px;
+  border: 2px solid #0003;
+  background-color: var(--list-background);
+  color: var(--text-Color);
 }

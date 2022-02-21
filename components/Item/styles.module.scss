@@ -6,7 +6,7 @@
   justify-content: space-between;
   width: 100%;
   border-radius: 5px;
-  background: #fff;
+  background: var(--list-background);
   box-shadow: 4px 8px 16px #0001;
   height: $Field-Height;
   padding: 0.5rem;
@@ -14,6 +14,7 @@
 .delete {
   border: none;
   background-color: transparent;
+  color: var(--text-Color);
   cursor: pointer;
   font-style: italic;
   &:disabled {
