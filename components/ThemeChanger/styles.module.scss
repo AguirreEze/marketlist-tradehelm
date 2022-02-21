@@ -1,39 +1,50 @@
-.button {
-  position: relative;
+.container {
+  position: absolute;
+  right: 4rem;
+  top: 1.5rem;
   width: 2.5rem;
   height: 1rem;
-  &::after {
-    content: "";
-    position: absolute;
-    left: -0.25rem;
-    top: -0.25rem;
-    height: 1.5rem;
-    width: 1.5rem;
-    border-radius: 50%;
-    background-color: #333;
-    border: 1px solid #fff3;
-  }
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 2.5rem;
-    height: 1rem;
-    border-radius: 0.5rem;
-    border: none;
-    background: #fff;
-  }
+}
+.button {
+  width: 2.5rem;
+  height: 1rem;
+  opacity: 0;
+  cursor: pointer;
 }
 
-.button:checked {
-  &::after {
-    left: unset;
-    right: -0.25rem;
-    background-color: #eee;
-    border: 1px solid #0003;
-  }
-  &::before {
-    background-color: #333;
-  }
+.switch {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: -0.25rem;
+  top: -0.25rem;
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  background-color: #333;
+  border: 1px solid #fff3;
+  pointer-events: none;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2.5rem;
+  height: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  pointer-events: none;
+  background: #fff;
+}
+.button:checked ~ .slider {
+  background: #333;
+}
+
+.button:checked ~ .switch {
+  left: unset;
+  right: -0.25rem;
+  background-color: deepskyblue;
+  border: 1px solid #0003;
 }

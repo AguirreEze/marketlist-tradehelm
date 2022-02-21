@@ -1,6 +1,8 @@
 import { useTheme } from "next-themes"
 import styles from "./styles.module.scss"
 import { useState, useEffect } from "react"
+import Sun from "../icons/Sun"
+import Moon from "../icons/Moon"
 
 export default function ThemeChanger() {
   const [darkTheme, setDarkTheme] = useState(false)
@@ -16,11 +18,15 @@ export default function ThemeChanger() {
   }, [])
 
   return (
-    <input
-      type="checkbox"
-      checked={darkTheme}
-      onChange={handleChecked}
-      className={styles.button}
-    />
+    <div className={styles.container}>
+      <input
+        type="checkbox"
+        checked={darkTheme}
+        onChange={handleChecked}
+        className={styles.button}
+      />
+      <div className={styles.slider}></div>
+      <div className={styles.switch}>{darkTheme ? <Sun /> : <Moon />}</div>
+    </div>
   )
 }
