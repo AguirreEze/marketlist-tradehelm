@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Item from "../components/Item"
 import ItemForm from "../components/ItemForm"
 import Modal from "../components/Modal"
@@ -7,6 +7,7 @@ import ThemeChanger from "../components/ThemeChanger"
 import styles from "./styles.module.scss"
 
 export default function Home() {
+  const addButton = useRef()
   const [list, setList] = useState([])
   const [showModal, setShowModal] = useState(false)
 
@@ -14,6 +15,9 @@ export default function Home() {
     const data = window.localStorage.getItem("marketlist-tydrok")
     if (data) setList(JSON.parse(data))
   }, [])
+  useEffect(() => {
+    if (addButton.current) addButton.current.focus()
+  }, [showModal])
 
   return (
     <div className={styles.background}>
@@ -31,13 +35,18 @@ export default function Home() {
             <Item data={e} key={e.id} listState={[list, setList]} />
           ))}
         </ul>
-        <button onClick={() => setShowModal(true)} className={styles.button}>
-          Add item
-        </button>
-        {showModal && (
+        {showModal ? (
           <Modal>
             <ItemForm setShowModal={setShowModal} listState={[list, setList]} />
           </Modal>
+        ) : (
+          <button
+            onClick={() => setShowModal(true)}
+            className={styles.button}
+            ref={addButton}
+          >
+            Add item
+          </button>
         )}
       </main>
     </div>

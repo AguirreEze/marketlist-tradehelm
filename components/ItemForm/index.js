@@ -8,6 +8,15 @@ export default function ItemForm({ setShowModal, listState }) {
   const [disableAdd, setDisableAdd] = useState(true)
 
   useEffect(() => {
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setShowModal(false)
+    })
+    return document.removeEventListener("keydown", (e) => {
+      if (e.key === "Escape") setShowModal(false)
+    })
+  }, [])
+
+  useEffect(() => {
     !itemInput ? setDisableAdd(true) : setDisableAdd(false)
   }, [itemInput])
 
@@ -45,6 +54,7 @@ export default function ItemForm({ setShowModal, listState }) {
         aria-label="item"
         className={styles.field}
         value={itemInput}
+        autoFocus
       ></input>
       <button onClick={closeForm} className={styles.button_close} type="button">
         Close
